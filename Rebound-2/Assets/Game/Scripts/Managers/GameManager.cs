@@ -22,7 +22,7 @@ namespace BumblePux.Rebound.Managers
 
         private void RunDebugMethods()
         {
-
+            TryFindGameModeOnStart();
         }
 
         private void TryFindGameModeOnStart()
