@@ -33,6 +33,7 @@ namespace BumblePux.Tools.Singleton
             if (instance != null && instance != this as T)
             {
                 Destroy(gameObject);
+                return;
             }
             else
             {
