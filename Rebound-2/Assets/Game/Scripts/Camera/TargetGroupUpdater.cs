@@ -19,14 +19,12 @@ namespace BumblePux.Rebound.Camera
 
         private void OnEnable()
         {
-            if (PlanetsManager.Instance)
-                PlanetsManager.Instance.OnPlanetsUpdated += UpdateTargets;
+            PlanetsManager.OnPlanetsUpdated += UpdateTargets;
         }
 
         private void OnDisable()
         {
-            if (PlanetsManager.Instance)
-                PlanetsManager.Instance.OnPlanetsUpdated -= UpdateTargets;
+            PlanetsManager.OnPlanetsUpdated -= UpdateTargets;
         }
 
         public void UpdateTargets(List<Transform> targets)

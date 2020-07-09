@@ -11,7 +11,7 @@ namespace BumblePux.Rebound.Managers
         private const int MIN_PLANETS = 1;
         private const int MAX_PLANETS = 3;
 
-        public event Action<List<Transform>> OnPlanetsUpdated;
+        public static event Action<List<Transform>> OnPlanetsUpdated;
 
         [Header("Settings")]
         [Range(MIN_PLANETS, MAX_PLANETS)]
