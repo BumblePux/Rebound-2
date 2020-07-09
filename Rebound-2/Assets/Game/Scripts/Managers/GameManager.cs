@@ -12,8 +12,10 @@ namespace BumblePux.Rebound.Managers
         public GameModeBase CurrentGameMode { get; set; }
 
 
-        private void Start()
+        protected override void Awake()
         {
+            base.Awake();
+
             RunDebugMethods();
         }
 
