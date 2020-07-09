@@ -91,9 +91,9 @@ namespace BumblePux.Rebound.Managers
 
         private void LinkPointsToPlanets()
         {
-            //points[0].GetComponent<TransitionPoint>().SetLinkedPlanets(planets[0].transform, planets[1].transform);
-            //points[1].GetComponent<TransitionPoint>().SetLinkedPlanets(planets[0].transform, planets[2].transform);
-            //points[2].GetComponent<TransitionPoint>().SetLinkedPlanets(planets[1].transform, planets[2].transform);
+            points[0].GetComponent<TransitionPoint>().SetLinkedPlanets(planets[0].transform, planets[1].transform);
+            points[1].GetComponent<TransitionPoint>().SetLinkedPlanets(planets[0].transform, planets[2].transform);
+            points[2].GetComponent<TransitionPoint>().SetLinkedPlanets(planets[1].transform, planets[2].transform);
         }
 
         private void Update()
