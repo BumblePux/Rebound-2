@@ -1,4 +1,5 @@
-﻿using BumblePux.Tools.Singleton;
+﻿using BumblePux.Rebound.Triggers;
+using BumblePux.Tools.Singleton;
 using UnityEngine;
 
 namespace BumblePux.Rebound.Managers
