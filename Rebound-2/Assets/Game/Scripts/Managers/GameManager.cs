@@ -7,7 +7,7 @@ namespace BumblePux.Rebound.Managers
     public class GameManager : Singleton<GameManager>
     {
         [Header("Debug")]
-        [SerializeField] bool FindGameModeOnStart;
+        [SerializeField] bool FindGameModeOnStart = default;
 
         public GameModeBase CurrentGameMode { get; set; }
 
