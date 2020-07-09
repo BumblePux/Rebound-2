@@ -1,5 +1,7 @@
 ﻿using BumblePux.Rebound.Triggers;
 using BumblePux.Tools.Singleton;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BumblePux.Rebound.Managers
@@ -8,6 +10,8 @@ namespace BumblePux.Rebound.Managers
     {
         private const int MIN_PLANETS = 1;
         private const int MAX_PLANETS = 3;
+
+        public event Action<List<Transform>> OnPlanetsUpdated;
 
         [Header("Settings")]
         [Range(MIN_PLANETS, MAX_PLANETS)]
@@ -29,6 +33,26 @@ namespace BumblePux.Rebound.Managers
         private bool isInitialized;
 
 
+
+        public List<Transform> GetActivePlanets()
+        {
+            var activePlanets = new List<Transform>();
+
+            foreach (var planet in planets)
+            {
+                if (planet.gameObject.activeInHierarchy)
+                    activePlanets.Add(planet);
+            }
+
+            return activePlanets;
+        }
+
+        public Transform GetRandomActivePlanet()
+        {
+            var activePlanets = GetActivePlanets();
+            int randomIndex = UnityEngine.Random.Range(0, activePlanets.Count);
+            return activePlanets[randomIndex];
+        }
 
         public void Initialize()
         {
@@ -60,7 +84,7 @@ namespace BumblePux.Rebound.Managers
 
         private bool ShouldPlanetSpawnOnRight()
         {
-            int spawnOnRight = Random.Range(0, 2);
+            int spawnOnRight = UnityEngine.Random.Range(0, 2);
             if (spawnOnRight == 1)
                 return true;
             else
@@ -113,6 +137,8 @@ namespace BumblePux.Rebound.Managers
                 }
 
                 UpdateTranistionPoints();
+
+                OnPlanetsUpdated?.Invoke(GetActivePlanets());
 
                 lastPlanetCount = PlanetCount;
             }

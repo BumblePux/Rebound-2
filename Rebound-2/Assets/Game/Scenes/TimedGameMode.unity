@@ -152,10 +152,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPersistent: 0
   DestroyOnSceneChange: 0
-  PlanetCount: 1
+  PlanetCount: 3
   AlwaysSpawnThirdPlanetOnRight: 0
-  PlanetPrefab: {fileID: 0}
-  PointPrefab: {fileID: 0}
+  PlanetPrefab: {fileID: 5265644457486708363, guid: 3457f475f466b8748bcb9b1a1a71a8f1,
+    type: 3}
+  PointPrefab: {fileID: 3635892599761328149, guid: 89fcb3151b55bca4d8d26507dcc260f0,
+    type: 3}
 --- !u!4 &111017874
 Transform:
   m_ObjectHideFlags: 0
@@ -512,7 +514,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 12
+  orthographic size: 1
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -616,6 +618,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1120375073}
+  - component: {fileID: 1120375075}
+  - component: {fileID: 1120375074}
   m_Layer: 0
   m_Name: TargetGroup
   m_TagString: Untagged
@@ -637,3 +641,32 @@ Transform:
   m_Father: {fileID: 240859133}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1120375074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120375072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 101458ab78d4abf4cade948449058a31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetRadius: 5
+--- !u!114 &1120375075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120375072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5eb80d8e62d9d145bb50fb783c0f731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PositionMode: 0
+  m_RotationMode: 0
+  m_UpdateMethod: 2
+  m_Targets: []
