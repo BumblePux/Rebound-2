@@ -1,19 +1,36 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
-namespace BumblePux
+namespace BumblePux.Rebound.GameModes
 {
-    public class GameModeBase : MonoBehaviour
+    public abstract class GameModeBase : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
+        [Header("Status Flags")]
+        public bool IsGameOver;
+        public bool HasGameStarted;
+
+        [Header("Base Settings")]
+        public float PlayerOffset = 5f;
+
+
+        protected void StartGameLoop()
         {
-            
+            StartCoroutine(GameLoop());
         }
-    
-        // Update is called once per frame
-        void Update()
+
+        private IEnumerator GameLoop()
         {
-            
+            yield return StartCoroutine(GameInitialize());
+            yield return StartCoroutine(GameInProgress());
+            yield return StartCoroutine(GameOver());
         }
+
+        protected abstract IEnumerator GameInitialize();
+        protected abstract IEnumerator GameInProgress();
+        protected abstract IEnumerator GameOver();
+
+
+        public abstract void TargetHit();
+        public abstract void TargetMissed();
     }
 }
