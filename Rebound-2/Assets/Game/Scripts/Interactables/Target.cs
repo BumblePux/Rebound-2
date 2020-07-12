@@ -26,8 +26,8 @@ namespace BumblePux.Rebound.Interactables
 
             transform.position = new Vector3(parentPlanet.position.x + offset, parentPlanet.position.y, parentPlanet.position.z);
 
-            while (currentPosition == 0)
-                ChangePosition();            
+            //while (currentPosition == 0)
+            //    ChangePosition();            
         }
 
         public void Interact()
@@ -38,6 +38,7 @@ namespace BumblePux.Rebound.Interactables
             // Play SFX
 
             ChangePosition();
+            //SimpleChangePosition();
         }
 
         private void ChangePosition()
@@ -53,9 +54,18 @@ namespace BumblePux.Rebound.Interactables
             }
             while (newPosition == currentPosition);
 
+            //Debug.Log($"[Target] Current: {currentPosition}, New: {newPosition}");
+
             currentPosition = newPosition;
 
-            transform.RotateAround(parentPlanet.position, Vector3.forward, currentPosition);
+            transform.RotateAround(parentPlanet.localPosition, Vector3.forward, currentPosition);
+        }
+
+        private void SimpleChangePosition()
+        {
+            int randomAngle = Random.Range(0, 360);
+
+            transform.RotateAround(parentPlanet.localPosition, Vector3.forward, randomAngle);
         }
     }
 }
