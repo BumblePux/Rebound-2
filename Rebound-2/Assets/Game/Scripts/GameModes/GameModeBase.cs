@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using BumblePux.Rebound.Interactables;
+using System.Collections;
 using UnityEngine;
 
 namespace BumblePux.Rebound.GameModes
@@ -30,7 +31,7 @@ namespace BumblePux.Rebound.GameModes
         protected abstract IEnumerator GameOver();
 
 
-        public abstract void TargetHit();
+        public abstract void TargetHit(Target target);
         public abstract void TargetMissed();
     }
 }
