@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 7140070357579777055}
   - component: {fileID: 2207862692763751960}
   - component: {fileID: 992114328479103266}
+  - component: {fileID: 587299849680947687}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -169,3 +170,16 @@ MonoBehaviour:
   OrbitTarget: {fileID: 0}
   TargetChangeCorrectionDuration: 0.2
   AlwaysChangePlanet: 0
+--- !u!114 &587299849680947687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8835583572102115814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfdd3af1cb7a5d94a8f27c8bf220ec42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AutoInteract: 1
