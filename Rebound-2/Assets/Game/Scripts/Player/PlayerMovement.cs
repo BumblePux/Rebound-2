@@ -74,7 +74,7 @@ namespace BumblePux.Rebound.Player
         {
             if (!isInitialized) return;
 
-            if (!gameMode.IsGameOver || gameMode.HasGameStarted)
+            if (!gameMode.IsGameOver && gameMode.HasGameStarted)
             {
                 Rotate();
             }
