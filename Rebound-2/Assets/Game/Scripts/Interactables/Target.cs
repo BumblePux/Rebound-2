@@ -11,6 +11,7 @@ namespace BumblePux.Rebound.Interactables
 
         private Transform parentPlanet;
         private int currentPosition;
+        private float offset;
 
         private GameModeBase gameMode;
 
@@ -19,8 +20,14 @@ namespace BumblePux.Rebound.Interactables
         public void Initialize()
         {
             gameMode = GameManager.Instance.CurrentGameMode;
+            offset = gameMode.PlayerOffset;
 
             parentPlanet = transform.parent;
+
+            transform.position = new Vector3(parentPlanet.position.x + offset, parentPlanet.position.y, parentPlanet.position.z);
+
+            while (currentPosition == 0)
+                ChangePosition();            
         }
 
         public void Interact()
