@@ -34,6 +34,11 @@ namespace BumblePux.Rebound.Managers
 
 
 
+        public Transform[] GetAllPlanets()
+        {
+            return planets;
+        }
+
         public List<Transform> GetActivePlanets()
         {
             var activePlanets = new List<Transform>();
