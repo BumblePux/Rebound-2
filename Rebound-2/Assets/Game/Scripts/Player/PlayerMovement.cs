@@ -27,6 +27,8 @@ namespace BumblePux.Rebound.Player
         private GameModeBase gameMode;
         private Transform sprite;
 
+        private bool isInitialized;
+
 
         public void Initialize()
         {
@@ -38,6 +40,8 @@ namespace BumblePux.Rebound.Player
             SetTarget(PlanetsManager.Instance.GetRandomActivePlanet());
 
             transform.position = new Vector3(OrbitTarget.position.x + playerOffsetFromPlanet, OrbitTarget.position.y, OrbitTarget.position.z);
+
+            isInitialized = true;
         }
 
         public void SetTarget(Transform newTarget)
@@ -68,6 +72,8 @@ namespace BumblePux.Rebound.Player
 
         private void Update()
         {
+            if (!isInitialized) return;
+
             if (!gameMode.IsGameOver || gameMode.HasGameStarted)
             {
                 Rotate();
