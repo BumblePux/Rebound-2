@@ -10,10 +10,6 @@ namespace BumblePux.Rebound.UI
         [Header("Game Mode")]
         public TimedGameMode timedMode;
 
-        [Header("UI Groups")]
-        public GameObject TimerGroup;
-        public GameObject ScoreGroup;
-
         [Header("Time UI Elements")]
         public TMP_Text TimeLabel;
         public Image TimeCircle;
@@ -25,14 +21,12 @@ namespace BumblePux.Rebound.UI
 
         private void OnEnable()
         {
-            timedMode.OnGameOverChanged += HandleOnGameOver;
             timedMode.OnTimeChanged += UpdateTime;
             timedMode.OnScoreChanged += UpdateScore;
         }
 
         private void OnDisable()
         {
-            timedMode.OnGameOverChanged -= HandleOnGameOver;
             timedMode.OnTimeChanged -= UpdateTime;
             timedMode.OnScoreChanged -= UpdateScore;
         }
@@ -48,20 +42,6 @@ namespace BumblePux.Rebound.UI
         public void UpdateScore(int currentScore)
         {
             ScoreLabel.SetText(currentScore.ToString());
-        }
-
-        public void HandleOnGameOver(bool isGameOver)
-        {
-            if (!isGameOver)
-            {
-                TimerGroup.SetActive(true);
-                ScoreGroup.SetActive(true);
-            }
-            else
-            {
-                TimerGroup.SetActive(false);
-                ScoreGroup.SetActive(false);
-            }
         }
     }
 }
