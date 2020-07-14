@@ -32,7 +32,7 @@ namespace BumblePux.Rebound.Player
 
         public void Initialize()
         {
-            gameMode = GameManager.Instance.CurrentGameMode;
+            gameMode = GameplayStatics.GetGameMode();
             sprite = GetComponentInChildren<SpriteRenderer>().transform;
 
             playerOffsetFromPlanet = gameMode.PlayerOffset;
