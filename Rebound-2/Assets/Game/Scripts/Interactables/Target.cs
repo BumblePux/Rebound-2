@@ -1,33 +1,35 @@
 ﻿using BumblePux.Rebound.GameModes;
-using BumblePux.Rebound.Managers;
 using UnityEngine;
 
 namespace BumblePux.Rebound.Interactables
 {
     public class Target : MonoBehaviour, IInteractable
     {
+        [Header("Settings")]
         public int PointValue = 1;
         public int SpawnPoints = 6;
 
         private Transform parentPlanet;
-        private int currentPosition;
         private float offset;
 
         private GameModeBase gameMode;
+        private Transform sprite;
 
 
 
         public void Initialize()
         {
-            gameMode = GameManager.Instance.CurrentGameMode;
+            gameMode = GameplayStatics.GetGameMode();
+            sprite = GetComponentInChildren<SpriteRenderer>().transform;
+
             offset = gameMode.PlayerOffset;
 
             parentPlanet = transform.parent;
 
-            transform.position = new Vector3(parentPlanet.position.x + offset, parentPlanet.position.y, parentPlanet.position.z);
+            transform.position = parentPlanet.position;
+            sprite.localPosition = new Vector3(offset, 0f, 0f);
 
-            //while (currentPosition == 0)
-            //    ChangePosition();            
+            ChangePosition();
         }
 
         public void Interact()
@@ -38,7 +40,6 @@ namespace BumblePux.Rebound.Interactables
             // Play SFX
 
             ChangePosition();
-            //SimpleChangePosition();
         }
 
         private void ChangePosition()
@@ -52,20 +53,13 @@ namespace BumblePux.Rebound.Interactables
 
                 newPosition = angle * multiplier;
             }
-            while (newPosition == currentPosition);
+            while (newPosition == (int)transform.localEulerAngles.z);
 
-            //Debug.Log($"[Target] Current: {currentPosition}, New: {newPosition}");
+            //Debug.Log($"[Target] Current: {transform.localEulerAngles.z}, New: {newPosition}");
 
-            currentPosition = newPosition;
+            Quaternion newRotation = Quaternion.Euler(0f, 0f, newPosition);
 
-            transform.RotateAround(parentPlanet.localPosition, Vector3.forward, currentPosition);
-        }
-
-        private void SimpleChangePosition()
-        {
-            int randomAngle = Random.Range(0, 360);
-
-            transform.RotateAround(parentPlanet.localPosition, Vector3.forward, randomAngle);
+            transform.rotation = newRotation;
         }
     }
 }
