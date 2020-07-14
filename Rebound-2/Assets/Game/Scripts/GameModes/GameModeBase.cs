@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace BumblePux.Rebound.GameModes
 {
+    [DefaultExecutionOrder(-101)]
     public abstract class GameModeBase : MonoBehaviour
     {
         public event Action<bool> OnGameOverChanged;
@@ -38,6 +39,11 @@ namespace BumblePux.Rebound.GameModes
             }
         }
 
+
+        private void Awake()
+        {
+            GameplayStatics.GetGameManager().CurrentGameMode = this;
+        }
 
         public void StartGameLoop()
         {
