@@ -1,6 +1,7 @@
 ﻿using BumblePux.Rebound.Interactables;
 using BumblePux.Rebound.Managers;
 using BumblePux.Rebound.Player;
+using BumblePux.Rebound.UI;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -9,8 +10,7 @@ namespace BumblePux.Rebound.GameModes
 {
     public class TimedGameMode : GameModeBase
     {
-        public event Action<float, float> OnTimeChanged;
-        public event Action<int> OnScoreChanged;
+        public event Action<float, float> OnTimeChanged;        
 
         [Header("Required Prefabs")]
         public PlayerMovement PlayerPrefab;
@@ -41,18 +41,7 @@ namespace BumblePux.Rebound.GameModes
                 currentTime = value;
                 OnTimeChanged?.Invoke(currentTime, MaxTime);
             }
-        }
-
-        private int currentScore;
-        public int CurrentScore
-        {
-            get => currentScore;
-            set
-            {
-                currentScore = value;
-                OnScoreChanged?.Invoke(currentScore);
-            }
-        }
+        }        
 
         private float currentPlayerSpeed;
 
@@ -70,6 +59,7 @@ namespace BumblePux.Rebound.GameModes
             player = Instantiate(PlayerPrefab, Vector3.zero, Quaternion.identity);
 
             currentPlayerSpeed = StartSpeed;
+            CurrentScore = 0;
 
             StartGameLoop();
         }
@@ -85,6 +75,7 @@ namespace BumblePux.Rebound.GameModes
             player.Speed = currentPlayerSpeed;
 
             player.Initialize();
+            PlayerInput.InputEnabled = false;
 
             yield return null;
         }
@@ -94,6 +85,7 @@ namespace BumblePux.Rebound.GameModes
             Debug.Log("Game in progress");
 
             HasGameStarted = true;
+            PlayerInput.InputEnabled = true;
 
             while (!IsGameOver)
             {
@@ -112,6 +104,8 @@ namespace BumblePux.Rebound.GameModes
         protected override IEnumerator GameOver()
         {
             Debug.Log("Game Over");
+
+            PlayerInput.InputEnabled = false;
 
             // Show game over UI
 
@@ -143,7 +137,7 @@ namespace BumblePux.Rebound.GameModes
                 secondPlanetEnabled = true;
             }
 
-            if (CurrentScore >= ScoreToEnableThirdPlanet && !thirdPlanetEnabled)
+            if (CurrentScore >= ScoreToEnableThirdPlanet && !thirdPlanetEnabled && secondPlanetEnabled)
             {
                 PlanetsManager.Instance.PlanetCount++;
                 thirdPlanetEnabled = true;
