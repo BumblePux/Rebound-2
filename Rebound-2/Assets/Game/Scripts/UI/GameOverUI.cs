@@ -37,7 +37,7 @@ namespace BumblePux.Rebound.UI
 
         public void LoadMainMenu()
         {
-            Debug.Log("Would load Main Menu now.");
+            SceneManager.LoadScene("MainMenu");
         }
 
         private void HandleOnGameOver(bool isGameOver)
