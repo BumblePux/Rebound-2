@@ -1,6 +1,5 @@
 ﻿using BumblePux.Rebound.GameModes;
 using BumblePux.Rebound.Interactables;
-using BumblePux.Rebound.Managers;
 using UnityEngine;
 
 namespace BumblePux.Rebound.Player
@@ -10,13 +9,23 @@ namespace BumblePux.Rebound.Player
         [Header("Debug Settings")]
         public bool AutoInteract;
 
+        private PlayerInput input;
         private IInteractable interactable;
         private GameModeBase gameMode;
 
 
         private void Awake()
         {
-            gameMode = GameManager.Instance.CurrentGameMode;
+            gameMode = GameplayStatics.GetGameMode();
+            input = GetComponent<PlayerInput>();
+        }
+
+        private void Update()
+        {
+            if (input.Interact())
+            {
+                TryInteract();
+            }
         }
 
         public void TryInteract()
