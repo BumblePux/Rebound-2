@@ -393,7 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPersistent: 1
   DestroyOnSceneChange: 0
-  FindGameModeOnStart: 1
+  FindGameModeOnStart: 0
 --- !u!4 &250983325
 Transform:
   m_ObjectHideFlags: 0
@@ -1777,7 +1777,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.2787469, g: 0.48889142, b: 0.6792453, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
