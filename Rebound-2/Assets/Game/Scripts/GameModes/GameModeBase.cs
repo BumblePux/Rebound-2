@@ -1,4 +1,5 @@
 ﻿using BumblePux.Rebound.Interactables;
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -6,15 +7,39 @@ namespace BumblePux.Rebound.GameModes
 {
     public abstract class GameModeBase : MonoBehaviour
     {
+        public event Action<bool> OnGameOverChanged;
+        public event Action<int> OnScoreChanged;
+
         [Header("Status Flags")]
-        public bool IsGameOver;
+        [SerializeField] bool isGameOver;
+        public bool IsGameOver
+        {
+            get => isGameOver;
+            set
+            {
+                isGameOver = value;
+                OnGameOverChanged?.Invoke(isGameOver);
+            }
+        }
+
         public bool HasGameStarted;
 
         [Header("Base Settings")]
         public float PlayerOffset = 5f;
 
+        private int currentScore;
+        public int CurrentScore
+        {
+            get => currentScore;
+            set
+            {
+                currentScore = value;
+                OnScoreChanged?.Invoke(currentScore);
+            }
+        }
 
-        protected void StartGameLoop()
+
+        public void StartGameLoop()
         {
             StartCoroutine(GameLoop());
         }

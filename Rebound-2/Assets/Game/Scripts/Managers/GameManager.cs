@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace BumblePux.Rebound.Managers
 {
+    [DefaultExecutionOrder(-100)]
     public class GameManager : Singleton<GameManager>
     {
         [Header("Debug")]
