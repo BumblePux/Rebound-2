@@ -17,7 +17,9 @@ namespace BumblePux.Rebound.Managers
         {
             base.Awake();
 
+#if UNITY_EDITOR
             RunDebugMethods();
+#endif
         }
 
 
