@@ -23,6 +23,7 @@ namespace BumblePux.Rebound.Player
         private bool isCorrecting;
         private float correctionStartTime;
 
+        private GameManager gameManager;
         private GameModeBase gameMode;
         private Transform sprite;
 
@@ -31,7 +32,10 @@ namespace BumblePux.Rebound.Player
 
         public void Initialize()
         {
+            gameManager = GameManager.Instance;
             gameMode = GameplayStatics.GetGameMode();
+
+            Instantiate(gameManager.SelectedShip.Prefab, Vector3.zero, Quaternion.identity, transform);
             sprite = GetComponentInChildren<SpriteRenderer>().transform;
 
             playerOffsetFromPlanet = gameMode.PlayerOffset;
