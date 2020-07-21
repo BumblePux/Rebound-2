@@ -8,8 +8,11 @@ namespace BumblePux.Rebound.Managers
     [DefaultExecutionOrder(-100)]
     public class GameManager : Singleton<GameManager>
     {
+        [Header("Datasets")]
+        public UnlockDataSet ShipDataset;
+
         [Header("Debug")]
-        [SerializeField] bool FindGameModeOnStart = default;
+        [SerializeField] bool FindGameModeOnStart = default;        
 
         public GameModeBase CurrentGameMode { get; set; }
 
@@ -20,9 +23,16 @@ namespace BumblePux.Rebound.Managers
         {
             base.Awake();
 
+            InitializeDefaults();
+
 #if UNITY_EDITOR
             RunDebugMethods();
 #endif
+        }
+
+        private void InitializeDefaults()
+        {
+            SelectedShip = ShipDataset.Unlockables[0];
         }
 
 
