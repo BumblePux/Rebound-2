@@ -1,4 +1,5 @@
 ﻿using BumblePux.Rebound.GameModes;
+using BumblePux.Rebound.Unlockables;
 using BumblePux.Tools.Singleton;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace BumblePux.Rebound.Managers
         [SerializeField] bool FindGameModeOnStart = default;
 
         public GameModeBase CurrentGameMode { get; set; }
+
+        public Unlockable SelectedShip { get; set; }
 
 
         protected override void Awake()
