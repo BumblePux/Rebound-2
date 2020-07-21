@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SpadeShip
   m_EditorClassIdentifier: 
   Name: Spade
-  Prefab: {fileID: 0}
+  Prefab: {fileID: 616373943848145024, guid: c3f82b3365ddc9c4e949af7286a09008, type: 3}
   PreviewImage: {fileID: 21300000, guid: e66b81bbf8869f04a81ac19d28c73721, type: 3}
   IsUnlocked: 1
