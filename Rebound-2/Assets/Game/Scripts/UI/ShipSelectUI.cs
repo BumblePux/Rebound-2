@@ -9,8 +9,6 @@ namespace BumblePux.Rebound.UI
 {
     public class ShipSelectUI : MonoBehaviour
     {
-        public UnlockDataSet ShipDataset;
-
         [Header("UI References")]
         public Button LeftButton;
         public Button RightButton;
@@ -18,6 +16,8 @@ namespace BumblePux.Rebound.UI
         public Image PreviewImage;
 
         private GameManager gameManger;
+        private UnlockDataSet shipDataset;
+
         private int currentIndex;
         private Unlockable currentSelection;
 
@@ -25,11 +25,12 @@ namespace BumblePux.Rebound.UI
         private void Start()
         {
             gameManger = GameManager.Instance;
+            shipDataset = gameManger.ShipDataset;
 
-            gameManger.SelectedShip = ShipDataset.Unlockables[currentIndex];
+            gameManger.SelectedShip = shipDataset.Unlockables[currentIndex];
 
             currentIndex = 0;
-            PreviewImage.sprite = ShipDataset.Unlockables[currentIndex].PreviewImage;
+            PreviewImage.sprite = shipDataset.Unlockables[currentIndex].PreviewImage;
 
             UpdateButtonState();
         }
@@ -56,13 +57,13 @@ namespace BumblePux.Rebound.UI
             }
             else
             {
-                if (currentIndex + 1 < ShipDataset.Unlockables.Length)
+                if (currentIndex + 1 < shipDataset.Unlockables.Length)
                 {
                     currentIndex++;
                 }
             }
 
-            currentSelection = ShipDataset.Unlockables[currentIndex];
+            currentSelection = shipDataset.Unlockables[currentIndex];
         }
 
         private void UpdatePreviewImage()
@@ -77,7 +78,7 @@ namespace BumblePux.Rebound.UI
                 LeftButton.interactable = false;
                 RightButton.interactable = true;
             }
-            else if (currentIndex == ShipDataset.Unlockables.Length - 1)
+            else if (currentIndex == shipDataset.Unlockables.Length - 1)
             {
                 RightButton.interactable = false;
                 LeftButton.interactable = true;
@@ -89,7 +90,7 @@ namespace BumblePux.Rebound.UI
             }
 
             string buySelectText;
-            Unlockable currentSelection = ShipDataset.Unlockables[currentIndex];
+            Unlockable currentSelection = shipDataset.Unlockables[currentIndex];
 
             if (gameManger.SelectedShip == currentSelection)
             {
@@ -105,7 +106,7 @@ namespace BumblePux.Rebound.UI
 
         private void UpdateSelectionVisibilty()
         {
-            if (ShipDataset.Unlockables[currentIndex].IsUnlocked)
+            if (shipDataset.Unlockables[currentIndex].IsUnlocked)
             {
                 PreviewImage.color = Color.white;
             }
@@ -117,7 +118,7 @@ namespace BumblePux.Rebound.UI
 
         public void HandleBuySelectButtonPressed()
         {
-            Unlockable currentSelection = ShipDataset.Unlockables[currentIndex];
+            Unlockable currentSelection = shipDataset.Unlockables[currentIndex];
 
             // If already equipped
             if (gameManger.SelectedShip == currentSelection)
