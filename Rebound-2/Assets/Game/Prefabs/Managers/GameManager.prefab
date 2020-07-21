@@ -45,4 +45,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPersistent: 1
   DestroyOnSceneChange: 0
+  ShipDataset: {fileID: 11400000, guid: ff3de728178d39146bfcc6ddec5a1631, type: 2}
   FindGameModeOnStart: 0
