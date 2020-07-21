@@ -25,5 +25,10 @@ namespace BumblePux.Rebound.UI
         {
             Debug.Log("Would load achievements UI.");
         }
+
+        public void LoadShipSelectMenu()
+        {
+            SceneManager.LoadScene("ShipSelectMenu");
+        }
     }
 }
