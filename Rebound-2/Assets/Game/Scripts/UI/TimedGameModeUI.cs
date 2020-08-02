@@ -5,11 +5,8 @@ using UnityEngine.UI;
 
 namespace BumblePux.Rebound.UI
 {
-    public class TimedGameModeUI : MonoBehaviour
+    public class TimedGameModeUI : HUD
     {
-        [Header("Game Mode")]
-        public TimedGameMode timedMode;
-
         [Header("UI Groups")]
         public GameObject TimerGroup;
         public GameObject ScoreGroup;
@@ -21,20 +18,23 @@ namespace BumblePux.Rebound.UI
         [Header("Score UI Elements")]
         public TMP_Text ScoreLabel;
 
+        private TimedGameMode timedMode;
 
+        float lastTime = -1f;
+        int lastScore = -1;
 
-        private void OnEnable()
+        private void Awake()
         {
-            timedMode.OnGameOverChanged += HandleOnGameOver;
-            timedMode.OnTimeChanged += UpdateTime;
-            timedMode.OnScoreChanged += UpdateScore;
+            timedMode = GetGameMode() as TimedGameMode;
         }
 
-        private void OnDisable()
+        private void Update()
         {
-            timedMode.OnGameOverChanged -= HandleOnGameOver;
-            timedMode.OnTimeChanged -= UpdateTime;
-            timedMode.OnScoreChanged -= UpdateScore;
+            if (lastTime != timedMode.CurrentTime)
+                UpdateTime(timedMode.CurrentTime, timedMode.MaxTime);
+
+            if (lastScore != timedMode.CurrentScore)
+                UpdateScore(timedMode.CurrentScore);
         }
 
         public void UpdateTime(float currentTime, float maxTime)
@@ -43,25 +43,15 @@ namespace BumblePux.Rebound.UI
 
             float percent = currentTime / maxTime;
             TimeCircle.fillAmount = percent;
+
+            lastTime = currentTime;
         }
 
         public void UpdateScore(int currentScore)
         {
             ScoreLabel.SetText(currentScore.ToString());
-        }
 
-        public void HandleOnGameOver(bool isGameOver)
-        {
-            if (!isGameOver)
-            {
-                TimerGroup.SetActive(true);
-                ScoreGroup.SetActive(true);
-            }
-            else
-            {
-                TimerGroup.SetActive(false);
-                ScoreGroup.SetActive(false);
-            }
+            lastScore = currentScore;
         }
     }
 }
