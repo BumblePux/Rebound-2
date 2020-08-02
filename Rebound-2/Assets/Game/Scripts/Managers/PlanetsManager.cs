@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace BumblePux.Rebound.Managers
 {
-    public class PlanetsManager : Singleton<PlanetsManager>
+    public class PlanetsManager : Actor
     {
         private const int MIN_PLANETS = 1;
         private const int MAX_PLANETS = 3;
@@ -61,7 +61,7 @@ namespace BumblePux.Rebound.Managers
 
         public void Initialize()
         {
-            distanceBetweenPlanets = GameManager.Instance.CurrentGameMode.PlayerOffset;
+            distanceBetweenPlanets = GetGameMode().PlayerOffset;
 
             CalculatePlanetPositions();
             CalculatePointPositions();
