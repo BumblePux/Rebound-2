@@ -3,14 +3,8 @@ using UnityEngine.SceneManagement;
 
 namespace BumblePux.Rebound.UI
 {
-    public class MainMenu : MonoBehaviour
+    public class MainMenu : HUD
     {
-
-        private void Start()
-        {
-            GameplayStatics.GetGameManager().CurrentGameMode = null;
-        }
-
         public void PlayGame()
         {
             SceneManager.LoadScene("TimedGameMode");
