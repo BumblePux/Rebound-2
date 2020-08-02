@@ -10,7 +10,7 @@ namespace BumblePux.Rebound.GameModes
 {
     public class TimedGameMode : GameModeBase
     {
-        public event Action<float, float> OnTimeChanged;        
+        public TargetsManager TargetsManager;
 
         [Header("Required Prefabs")]
         public PlayerMovement PlayerPrefab;
@@ -32,16 +32,7 @@ namespace BumblePux.Rebound.GameModes
         public int ScoreToEnableSecondPlanet = 15;
         public int ScoreToEnableThirdPlanet = 40;
 
-        private float currentTime;
-        public float CurrentTime
-        {
-            get => currentTime;
-            set
-            {
-                currentTime = value;
-                OnTimeChanged?.Invoke(currentTime, MaxTime);
-            }
-        }        
+        public float CurrentTime { get; private set; }
 
         private float currentPlayerSpeed;
 
@@ -49,14 +40,18 @@ namespace BumblePux.Rebound.GameModes
         private bool thirdPlanetEnabled;
 
         private PlayerMovement player;
+        private GameObject gameOverUI;
 
 
 
         private void Start()
         {
-            PlanetsManager.Instance.Initialize();
-            TargetsManager.Instance.Initialize();
+            gameOverUI = Instantiate(GameOverUIPrefab, Vector3.zero, Quaternion.identity);            
+
+            PlanetsManager.Initialize();
+            TargetsManager.Initialize();
             player = Instantiate(PlayerPrefab, Vector3.zero, Quaternion.identity);
+            player.Initialize();
 
             currentPlayerSpeed = StartSpeed;
             CurrentScore = 0;
@@ -68,13 +63,19 @@ namespace BumblePux.Rebound.GameModes
         {
             Debug.Log("Game Initialize");
 
+            // Reset game state
             IsGameOver = false;
             HasGameStarted = false;
 
+            // Disable UI
+            gameOverUI.SetActive(false);
+
+            // Set starting parameters.
+            // Player speed equals currentPlayerSpeed rather than StartSpeed so as to retain the previous session speed if an Ad was successfully watched.
             CurrentTime = MaxTime;
             player.Speed = currentPlayerSpeed;
-
-            player.Initialize();
+            player.SetNewRandomTarget();
+            
             PlayerInput.InputEnabled = false;
 
             yield return null;
@@ -108,6 +109,7 @@ namespace BumblePux.Rebound.GameModes
             PlayerInput.InputEnabled = false;
 
             // Show game over UI
+            gameOverUI.SetActive(true);
 
             yield return null;
         }
@@ -118,10 +120,12 @@ namespace BumblePux.Rebound.GameModes
 
             CurrentScore++;
 
+            // Increment time and clamp
             CurrentTime += TimeBonus;
             if (CurrentTime > MaxTime)
                 CurrentTime = MaxTime;
             
+            // Increase player speed and clamp
             if (currentPlayerSpeed < MaxSpeed)
             {
                 currentPlayerSpeed += SpeedIncrementOnTargetHit;
@@ -131,15 +135,17 @@ namespace BumblePux.Rebound.GameModes
                 player.Speed = currentPlayerSpeed;
             }
 
+            // Try to enable 2nd planet
             if (CurrentScore >= ScoreToEnableSecondPlanet && !secondPlanetEnabled)
             {
-                PlanetsManager.Instance.PlanetCount++;
+                PlanetsManager.PlanetCount++;
                 secondPlanetEnabled = true;
             }
 
+            // Try to enable 3rd planet
             if (CurrentScore >= ScoreToEnableThirdPlanet && !thirdPlanetEnabled && secondPlanetEnabled)
             {
-                PlanetsManager.Instance.PlanetCount++;
+                PlanetsManager.PlanetCount++;
                 thirdPlanetEnabled = true;
             }
         }
