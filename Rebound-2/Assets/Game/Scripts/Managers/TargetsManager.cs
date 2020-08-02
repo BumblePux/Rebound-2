@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace BumblePux.Rebound.Managers
 {
-    public class TargetsManager : Singleton<TargetsManager>
+    public class TargetsManager : Actor
     {
         [Header("Target Settings")]
         public Target TargetPrefab;
@@ -12,7 +12,7 @@ namespace BumblePux.Rebound.Managers
 
         public void Initialize()
         {
-            var planets = PlanetsManager.Instance.GetAllPlanets();
+            var planets = GetGameMode().PlanetsManager.GetAllPlanets();
 
             for (int i = 0; i < planets.Length; i++)
             {
