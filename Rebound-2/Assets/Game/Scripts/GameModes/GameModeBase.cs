@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace BumblePux.Rebound.GameModes
 {
-    [DefaultExecutionOrder(-101)]
     public abstract class GameModeBase : Actor
     {
         public event Action<bool> OnGameOverChanged;
