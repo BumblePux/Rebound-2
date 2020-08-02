@@ -7,12 +7,22 @@ namespace BumblePux.Tools.Singleton
         [Header("Singleton Settiings")]
         [SerializeField] bool isPersistent = true;
 
+        private static bool shuttingDown = false;
+
         private static T instance;
 
         public static T Instance
         {
             get
             {
+                if (shuttingDown)
+                {
+#if UNITY_EDITOR
+                    Debug.LogWarning($"{typeof(T).Name} (Singleton) already destroyed. Returning null.");
+#endif
+                    return null;
+                }
+
                 if (instance == null)
                 {
                     instance = FindObjectOfType<T>();
@@ -47,6 +57,16 @@ namespace BumblePux.Tools.Singleton
                     DontDestroyOnLoad(gameObject);
                 }
             }
+        }
+
+        protected virtual void OnApplicationQuit()
+        {
+            shuttingDown = true;
+        }
+
+        protected virtual void OnDestroy()
+        {
+            shuttingDown = true;
         }
     }
 }
