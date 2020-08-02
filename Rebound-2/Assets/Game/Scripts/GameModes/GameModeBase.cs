@@ -6,7 +6,7 @@ using UnityEngine;
 namespace BumblePux.Rebound.GameModes
 {
     [DefaultExecutionOrder(-101)]
-    public abstract class GameModeBase : MonoBehaviour
+    public abstract class GameModeBase : Actor
     {
         public event Action<bool> OnGameOverChanged;
         public event Action<int> OnScoreChanged;
@@ -40,10 +40,22 @@ namespace BumblePux.Rebound.GameModes
         }
 
 
+        #region UNITY_METHODS
+
         private void Awake()
         {
-            GameplayStatics.GetGameManager().CurrentGameMode = this;
+            GetGameInstance().CurrentGameMode = this;
         }
+
+        private void OnDestroy()
+        {
+            GetGameInstance().CurrentGameMode = null;
+        }
+
+        #endregion
+
+
+        #region GAME_LOOP
 
         public void StartGameLoop()
         {
@@ -61,8 +73,14 @@ namespace BumblePux.Rebound.GameModes
         protected abstract IEnumerator GameInProgress();
         protected abstract IEnumerator GameOver();
 
+        #endregion
+
+
+        #region TARGET_METHODS
 
         public abstract void TargetHit(Target target);
         public abstract void TargetMissed();
+
+        #endregion
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace BumblePux.Rebound.Player
 {
-    public class PlayerMovement : MonoBehaviour
+    public class PlayerMovement : Actor
     {
         public enum Rotation { Clockwise, AntiClockwise };
 
@@ -33,7 +33,7 @@ namespace BumblePux.Rebound.Player
         public void Initialize()
         {
             gameManager = GameManager.Instance;
-            gameMode = GameplayStatics.GetGameMode();
+            gameMode = GetGameMode();
 
             Instantiate(gameManager.SelectedShip.Prefab, Vector3.zero, Quaternion.identity, transform);
             sprite = GetComponentInChildren<SpriteRenderer>().transform;

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace BumblePux.Rebound.Interactables
 {
-    public class Target : MonoBehaviour, IInteractable
+    public class Target : Actor, IInteractable
     {
         [Header("Settings")]
         public int PointValue = 1;
@@ -12,17 +12,15 @@ namespace BumblePux.Rebound.Interactables
         private Transform parentPlanet;
         private float offset;
 
-        private GameModeBase gameMode;
         private Transform sprite;
 
 
 
         public void Initialize()
         {
-            gameMode = GameplayStatics.GetGameMode();
             sprite = GetComponentInChildren<SpriteRenderer>().transform;
 
-            offset = gameMode.PlayerOffset;
+            offset = GetGameMode().PlayerOffset;
 
             parentPlanet = transform.parent;
 
@@ -34,7 +32,7 @@ namespace BumblePux.Rebound.Interactables
 
         public void Interact()
         {
-            gameMode.TargetHit(this);
+            GetGameMode().TargetHit(this);
 
             // Play VFX
             // Play SFX

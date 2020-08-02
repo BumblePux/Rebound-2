@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace BumblePux.Rebound.UI
 {
-    public class GameOverUI : MonoBehaviour
+    public class GameOverUI : HUD
     {
         [Header("UI Elements")]
         public TMP_Text ScoreLabel;
@@ -15,7 +15,7 @@ namespace BumblePux.Rebound.UI
 
         private void Awake()
         {
-            gameMode = GameplayStatics.GetGameMode();
+            gameMode = GetGameMode();
             gameMode.OnGameOverChanged += HandleOnGameOver;
         }
 

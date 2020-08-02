@@ -4,19 +4,17 @@ using UnityEngine;
 
 namespace BumblePux.Rebound.Player
 {
-    public class PlayerInteraction : MonoBehaviour
+    public class PlayerInteraction : Actor
     {
         [Header("Debug Settings")]
         public bool AutoInteract;
 
         private PlayerInput input;
         private IInteractable interactable;
-        private GameModeBase gameMode;
 
 
         private void Awake()
         {
-            gameMode = GameplayStatics.GetGameMode();
             input = GetComponent<PlayerInput>();
         }
 
@@ -36,7 +34,7 @@ namespace BumblePux.Rebound.Player
             }
             else
             {
-                gameMode.TargetMissed();
+                GetGameMode().TargetMissed();
             }
         }
 
