@@ -23,7 +23,6 @@ namespace BumblePux.Rebound.Player
         private bool isCorrecting;
         private float correctionStartTime;
 
-        private GameManager gameManager;
         private GameModeBase gameMode;
         private Transform sprite;
 
@@ -32,19 +31,22 @@ namespace BumblePux.Rebound.Player
 
         public void Initialize()
         {
-            gameManager = GameManager.Instance;
             gameMode = GetGameMode();
 
-            Instantiate(gameManager.SelectedShip.Prefab, Vector3.zero, Quaternion.identity, transform);
+            Instantiate(GetGameInstance().SelectedShip.Prefab, Vector3.zero, Quaternion.identity, transform);
             sprite = GetComponentInChildren<SpriteRenderer>().transform;
 
             playerOffsetFromPlanet = gameMode.PlayerOffset;
 
-            SetTarget(PlanetsManager.Instance.GetRandomActivePlanet());
-
-            transform.position = new Vector3(OrbitTarget.position.x + playerOffsetFromPlanet, OrbitTarget.position.y, OrbitTarget.position.z);
+            SetNewRandomTarget();
 
             isInitialized = true;
+        }
+
+        public void SetNewRandomTarget()
+        {
+            SetTarget(GetGameMode().PlanetsManager.GetRandomActivePlanet());
+            transform.position = new Vector3(OrbitTarget.position.x + playerOffsetFromPlanet, OrbitTarget.position.y, OrbitTarget.position.z);
         }
 
         public void SetTarget(Transform newTarget)
