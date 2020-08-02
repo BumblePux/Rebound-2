@@ -1,4 +1,5 @@
 ﻿using BumblePux.Rebound.Interactables;
+using BumblePux.Rebound.Managers;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -7,36 +8,22 @@ namespace BumblePux.Rebound.GameModes
 {
     public abstract class GameModeBase : Actor
     {
-        public event Action<bool> OnGameOverChanged;
-        public event Action<int> OnScoreChanged;
-
         [Header("Status Flags")]
         [SerializeField] bool isGameOver;
-        public bool IsGameOver
-        {
-            get => isGameOver;
-            set
-            {
-                isGameOver = value;
-                OnGameOverChanged?.Invoke(isGameOver);
-            }
-        }
+        public bool IsGameOver { get => isGameOver; set => isGameOver = value; }
 
         public bool HasGameStarted;
 
         [Header("Base Settings")]
         public float PlayerOffset = 5f;
 
-        private int currentScore;
-        public int CurrentScore
-        {
-            get => currentScore;
-            set
-            {
-                currentScore = value;
-                OnScoreChanged?.Invoke(currentScore);
-            }
-        }
+        [Header("UI")]
+        [SerializeField] protected GameObject GameOverUIPrefab;
+
+        [Header("Required References")]
+        public PlanetsManager PlanetsManager;
+
+        public int CurrentScore { get; protected set; }
 
 
         #region UNITY_METHODS
@@ -48,13 +35,15 @@ namespace BumblePux.Rebound.GameModes
 
         private void OnDestroy()
         {
+#if !UNITY_EDITOR
             GetGameInstance().CurrentGameMode = null;
+#endif
         }
 
-        #endregion
+#endregion
 
 
-        #region GAME_LOOP
+#region GAME_LOOP
 
         public void StartGameLoop()
         {
@@ -72,14 +61,14 @@ namespace BumblePux.Rebound.GameModes
         protected abstract IEnumerator GameInProgress();
         protected abstract IEnumerator GameOver();
 
-        #endregion
+#endregion
 
 
-        #region TARGET_METHODS
+#region TARGET_METHODS
 
         public abstract void TargetHit(Target target);
         public abstract void TargetMissed();
 
-        #endregion
+#endregion
     }
 }
