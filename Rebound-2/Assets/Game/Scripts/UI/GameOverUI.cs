@@ -10,24 +10,17 @@ namespace BumblePux.Rebound.UI
         [Header("UI Elements")]
         public TMP_Text ScoreLabel;
 
-        private GameModeBase gameMode;
 
-
-        private void Awake()
-        {
-            gameMode = GetGameMode();
-            gameMode.OnGameOverChanged += HandleOnGameOver;
-        }
 
         private void OnEnable()
         {            
-            ScoreLabel.SetText(gameMode.CurrentScore.ToString());
+            ScoreLabel.SetText(GetGameMode().CurrentScore.ToString());
         }
 
         public void WatchAd()
         {
             Debug.Log("Would show a Rewarded Ad now.");
-            gameMode.StartGameLoop();
+            GetGameMode().StartGameLoop();
         }
 
         public void ReloadGameMode()
@@ -38,23 +31,6 @@ namespace BumblePux.Rebound.UI
         public void LoadMainMenu()
         {
             SceneManager.LoadScene("MainMenu");
-        }
-
-        private void HandleOnGameOver(bool isGameOver)
-        {
-            if (!isGameOver)
-            {
-                gameObject.SetActive(false);
-            }
-            else
-            {
-                gameObject.SetActive(true);
-            }
-        }
-
-        private void OnDestroy()
-        {
-            gameMode.OnGameOverChanged -= HandleOnGameOver;
         }
     }
 }
