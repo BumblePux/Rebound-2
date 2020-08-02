@@ -5,8 +5,7 @@ namespace BumblePux.Tools.Singleton
     public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
     {
         [Header("Singleton Settiings")]
-        [SerializeField] bool isPersistent = false;
-        public bool DestroyOnSceneChange = false;
+        [SerializeField] bool isPersistent = true;
 
         private static T instance;
 
@@ -19,8 +18,12 @@ namespace BumblePux.Tools.Singleton
                     instance = FindObjectOfType<T>();
                     if (instance == null)
                     {
-                        Debug.LogWarning($"[{typeof(T).Name}] Instance called but not found. Is {typeof(T).Name} present in the scene?");
-                        return null;
+#if UNITY_EDITOR
+                        Debug.LogWarning($"{typeof(T).Name} instance not found in the scene. Creating one now...");
+#endif
+                        var singleton = new GameObject();
+                        instance = singleton.AddComponent<T>();
+                        singleton.name = typeof(T).Name + " (Singleton)";
                     }
                 }
 
@@ -43,14 +46,6 @@ namespace BumblePux.Tools.Singleton
                 {
                     DontDestroyOnLoad(gameObject);
                 }
-            }
-        }
-
-        protected virtual void OnDisable()
-        {
-            if (DestroyOnSceneChange)
-            {
-                Destroy(gameObject);
             }
         }
     }
