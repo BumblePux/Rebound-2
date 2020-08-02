@@ -13,7 +13,7 @@ namespace BumblePux
         public GameModeBase CurrentGameMode { get => currentGameMode; set => currentGameMode = value; }
 
         [Header("Data Sets")]
-        [SerializeField] UnlockDataSet ShipDataSet = default;
+        public UnlockDataSet ShipDataSet;
 
         public Unlockable SelectedShip { get; set; }
 
