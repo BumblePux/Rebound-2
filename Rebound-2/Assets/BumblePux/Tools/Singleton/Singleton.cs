@@ -2,7 +2,7 @@
 
 namespace BumblePux.Tools.Singleton
 {
-    public abstract class Singleton<T> : MonoBehaviour where T : Singleton<T>
+    public abstract class Singleton<T> : Actor where T : Singleton<T>
     {
         [Header("Singleton Settiings")]
         [SerializeField] bool isPersistent = true;
