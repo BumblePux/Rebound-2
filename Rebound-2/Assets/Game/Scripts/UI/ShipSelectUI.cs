@@ -1,5 +1,4 @@
-﻿using BumblePux.Rebound.Managers;
-using BumblePux.Rebound.Unlockables;
+﻿using BumblePux.Rebound.Unlockables;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +6,7 @@ using UnityEngine.UI;
 
 namespace BumblePux.Rebound.UI
 {
-    public class ShipSelectUI : MonoBehaviour
+    public class ShipSelectUI : HUD
     {
         [Header("UI References")]
         public Button LeftButton;
@@ -15,7 +14,7 @@ namespace BumblePux.Rebound.UI
         public TMP_Text BuySelectText;
         public Image PreviewImage;
 
-        private GameManager gameManger;
+        private GameInstance gameInstance;
         private UnlockDataSet shipDataset;
 
         private int currentIndex;
@@ -24,10 +23,10 @@ namespace BumblePux.Rebound.UI
 
         private void Start()
         {
-            gameManger = GameManager.Instance;
-            shipDataset = gameManger.ShipDataset;
+            gameInstance = GetGameInstance();
+            shipDataset = gameInstance.ShipDataSet;
 
-            gameManger.SelectedShip = shipDataset.Unlockables[currentIndex];
+            gameInstance.SelectedShip = shipDataset.Unlockables[currentIndex];
 
             currentIndex = 0;
             PreviewImage.sprite = shipDataset.Unlockables[currentIndex].PreviewImage;
@@ -92,7 +91,7 @@ namespace BumblePux.Rebound.UI
             string buySelectText;
             Unlockable currentSelection = shipDataset.Unlockables[currentIndex];
 
-            if (gameManger.SelectedShip == currentSelection)
+            if (gameInstance.SelectedShip == currentSelection)
             {
                 buySelectText = "Equipped";
             }
@@ -121,7 +120,7 @@ namespace BumblePux.Rebound.UI
             Unlockable currentSelection = shipDataset.Unlockables[currentIndex];
 
             // If already equipped
-            if (gameManger.SelectedShip == currentSelection)
+            if (gameInstance.SelectedShip == currentSelection)
             {
                 return;
             }
@@ -129,7 +128,7 @@ namespace BumblePux.Rebound.UI
             // If unlocked, then equip
             if (currentSelection.IsUnlocked)
             {
-                gameManger.SelectedShip = currentSelection;
+                gameInstance.SelectedShip = currentSelection;
             }
             else
             {
