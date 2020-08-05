@@ -64,9 +64,9 @@ namespace BumblePux.Tools.Singleton
             shuttingDown = true;
         }
 
-        protected virtual void OnDestroy()
-        {
-            shuttingDown = true;
-        }
+        //protected virtual void OnDestroy()
+        //{
+        //    shuttingDown = true;
+        //}
     }
 }
