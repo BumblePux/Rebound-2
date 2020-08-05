@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace BumblePux.Rebound.GameModes
 {
+    [DefaultExecutionOrder(-100)]
     public abstract class GameModeBase : Actor
     {
         [Header("Status Flags")]
