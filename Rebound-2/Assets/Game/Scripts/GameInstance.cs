@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace BumblePux
 {
-    [DefaultExecutionOrder(-100)]
+    [DefaultExecutionOrder(-200)]
     public class GameInstance : Singleton<GameInstance>
     {
         [Header("Current References")]
