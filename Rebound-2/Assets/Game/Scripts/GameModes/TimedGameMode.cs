@@ -15,6 +15,9 @@ namespace BumblePux.Rebound.GameModes
         [Header("Required Prefabs")]
         public PlayerMovement PlayerPrefab;
 
+        [Header("Required References")]
+        public TimedGameModeUI timedModeUI;
+
         [Header("Timed Mode Base Settings")]
         public float CoyoteTime = 0.2f;
 
@@ -67,7 +70,8 @@ namespace BumblePux.Rebound.GameModes
             IsGameOver = false;
             HasGameStarted = false;
 
-            // Disable UI
+            // Setup UI
+            timedModeUI.gameObject.SetActive(true);
             gameOverUI.SetActive(false);
 
             // Set starting parameters.
@@ -108,7 +112,8 @@ namespace BumblePux.Rebound.GameModes
 
             PlayerInput.InputEnabled = false;
 
-            // Show game over UI
+            // Set UI
+            timedModeUI.gameObject.SetActive(false);
             gameOverUI.SetActive(true);
 
             yield return null;
