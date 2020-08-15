@@ -179,6 +179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 240859133}
+  - component: {fileID: 240859134}
   m_Layer: 0
   m_Name: Cameras
   m_TagString: Untagged
@@ -203,6 +204,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!45 &240859134
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 240859132}
+  m_Enabled: 1
+  m_CustomSkybox: {fileID: 2100000, guid: dd63ae00ae30c464988f10c9667af8fc, type: 2}
 --- !u!1001 &303448956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -214,6 +224,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SpaceBackground
+      objectReference: {fileID: 0}
+    - target: {fileID: 9021219851393893656, guid: 24b77ca9340ce534fbe85f3c1498f46d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9021219851393893657, guid: 24b77ca9340ce534fbe85f3c1498f46d,
         type: 3}
@@ -277,8 +292,13 @@ PrefabInstance:
       objectReference: {fileID: 897075903}
     - target: {fileID: 9021219852718078781, guid: 24b77ca9340ce534fbe85f3c1498f46d,
         type: 3}
-      propertyPath: m_PlaneDistance
-      value: 100
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9021219853143235993, guid: 24b77ca9340ce534fbe85f3c1498f46d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24b77ca9340ce534fbe85f3c1498f46d, type: 3}
@@ -795,12 +815,13 @@ MonoBehaviour:
   isGameOver: 0
   HasGameStarted: 0
   PlayerOffset: 6
-  GameOverUIPrefab: {fileID: 4856336668759080876, guid: 3b4b492bcefcda14696433df2bea175e,
+  GameOverUIPrefab: {fileID: 5477098662815964186, guid: 1f51f6e64747de045a46de78cbf94bdb,
     type: 3}
   PlanetsManager: {fileID: 111017873}
   TargetsManager: {fileID: 1549281723}
   PlayerPrefab: {fileID: 992114328479103266, guid: 5fd8567c0da5d6143a3ea71242631cd4,
     type: 3}
+  timedModeUI: {fileID: 1545441147}
   CoyoteTime: 0.2
   MaxTime: 30
   TimeBonus: 2
@@ -872,6 +893,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7071755606859122129, guid: 15b92360bb4f53d4caf8269aa0396c82,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7071755606859122130, guid: 15b92360bb4f53d4caf8269aa0396c82,
         type: 3}
       propertyPath: m_Name
@@ -917,7 +943,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.05549128, g: 0.14030546, b: 0.2735849, a: 0}
+  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -934,7 +960,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 14
+  orthographic size: 12
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -976,7 +1002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RenderShadows: 1
+  m_RenderShadows: 0
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
@@ -1246,6 +1272,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1441380497103000550, guid: 0423023cd14aadb488e318e024090a33,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441380497103000550, guid: 0423023cd14aadb488e318e024090a33,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441380497103000550, guid: 0423023cd14aadb488e318e024090a33,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1441380497103000550, guid: 0423023cd14aadb488e318e024090a33,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2485034789634789098, guid: 0423023cd14aadb488e318e024090a33,
         type: 3}
       propertyPath: m_Name
@@ -1304,6 +1350,26 @@ PrefabInstance:
     - target: {fileID: 2764851137756308737, guid: 0423023cd14aadb488e318e024090a33,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3530892710522343928, guid: 0423023cd14aadb488e318e024090a33,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3530892710522343928, guid: 0423023cd14aadb488e318e024090a33,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3530892710522343928, guid: 0423023cd14aadb488e318e024090a33,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3530892710522343928, guid: 0423023cd14aadb488e318e024090a33,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
