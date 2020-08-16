@@ -43,13 +43,16 @@ namespace BumblePux.Rebound.GameModes
         private bool thirdPlanetEnabled;
 
         private PlayerMovement player;
-        private GameObject gameOverUI;
+
+        private GameOverUI gameOverUI;
+        private PauseUI pauseUI;
 
 
 
         private void Start()
         {
-            gameOverUI = Instantiate(GameOverUIPrefab, Vector3.zero, Quaternion.identity);            
+            gameOverUI = Instantiate(GameOverUIPrefab, Vector3.zero, Quaternion.identity).GetComponent<GameOverUI>();
+            pauseUI = Instantiate(PauseUIPrefab, Vector3.zero, Quaternion.identity).GetComponent<PauseUI>();
 
             PlanetsManager.Initialize();
             TargetsManager.Initialize();
@@ -69,10 +72,15 @@ namespace BumblePux.Rebound.GameModes
             // Reset game state
             IsGameOver = false;
             HasGameStarted = false;
+            Resume();
 
             // Setup UI
-            timedModeUI.gameObject.SetActive(true);
-            gameOverUI.SetActive(false);
+            timedModeUI.Show();
+            timedModeUI.UpdateScore(CurrentScore);
+            timedModeUI.UpdateTime(CurrentTime, MaxTime);
+
+            gameOverUI.Hide();
+            pauseUI.Hide();
 
             // Set starting parameters.
             // Player speed equals currentPlayerSpeed rather than StartSpeed so as to retain the previous session speed if an Ad was successfully watched.
@@ -102,6 +110,8 @@ namespace BumblePux.Rebound.GameModes
                     IsGameOver = true;
                 }
 
+                timedModeUI.UpdateTime(CurrentTime, MaxTime);
+
                 yield return null;
             }            
         }
@@ -113,8 +123,9 @@ namespace BumblePux.Rebound.GameModes
             PlayerInput.InputEnabled = false;
 
             // Set UI
-            timedModeUI.gameObject.SetActive(false);
-            gameOverUI.SetActive(true);
+            timedModeUI.Hide();
+            pauseUI.HideAll();
+            gameOverUI.Show();
 
             yield return null;
         }
@@ -124,6 +135,7 @@ namespace BumblePux.Rebound.GameModes
             player.TryChangeDirection(true);
 
             CurrentScore++;
+            timedModeUI.UpdateScore(CurrentScore);
 
             // Increment time and clamp
             CurrentTime += TimeBonus;
@@ -161,5 +173,28 @@ namespace BumblePux.Rebound.GameModes
 
             CurrentTime -= TimePenalty;
         }
+
+
+        #region PAUSE_HANDLING
+
+        protected override void Pause()
+        {
+            base.Pause();
+
+            Time.timeScale = 0f;
+            timedModeUI.Hide();
+            pauseUI.Show();
+        }
+
+        protected override void Resume()
+        {
+            base.Resume();
+
+            Time.timeScale = 1f;
+            pauseUI.Hide();
+            timedModeUI.Show();
+        }
+
+        #endregion
     }
 }
