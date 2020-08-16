@@ -7,15 +7,12 @@ namespace BumblePux.Rebound.UI
 {
     public class GameOverUI : HUD
     {
+        [Header("Groups")]
+        [SerializeField] GameObject GameOverUIRoot = default;
+
         [Header("UI Elements")]
         public TMP_Text ScoreLabel;
 
-
-
-        private void OnEnable()
-        {            
-            ScoreLabel.SetText(GetGameMode().CurrentScore.ToString());
-        }
 
         public void WatchAd()
         {
@@ -31,6 +28,17 @@ namespace BumblePux.Rebound.UI
         public void LoadMainMenu()
         {
             SceneManager.LoadScene("MainMenu");
+        }
+
+        public override void Show()
+        {
+            GameOverUIRoot.SetActive(true);
+            ScoreLabel.SetText(GetGameMode().CurrentScore.ToString());
+        }
+
+        public override void Hide()
+        {
+            GameOverUIRoot.SetActive(false);
         }
     }
 }
