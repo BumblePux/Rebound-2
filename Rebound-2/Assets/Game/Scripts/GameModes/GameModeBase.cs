@@ -13,6 +13,9 @@ namespace BumblePux.Rebound.GameModes
         [SerializeField] bool isGameOver;
         public bool IsGameOver { get => isGameOver; set => isGameOver = value; }
 
+        [SerializeField] bool isPaused;
+        public bool IsPaused { get => isPaused; set => isPaused = value; }
+
         public bool HasGameStarted;
 
         [Header("Base Settings")]
@@ -20,6 +23,7 @@ namespace BumblePux.Rebound.GameModes
 
         [Header("UI")]
         [SerializeField] protected GameObject GameOverUIPrefab;
+        [SerializeField] protected GameObject PauseUIPrefab;
 
         [Header("Required References")]
         public PlanetsManager PlanetsManager;
@@ -41,10 +45,10 @@ namespace BumblePux.Rebound.GameModes
 #endif
         }
 
-#endregion
+        #endregion
 
 
-#region GAME_LOOP
+        #region GAME_LOOP
 
         public void StartGameLoop()
         {
@@ -62,14 +66,41 @@ namespace BumblePux.Rebound.GameModes
         protected abstract IEnumerator GameInProgress();
         protected abstract IEnumerator GameOver();
 
-#endregion
+        #endregion
 
 
-#region TARGET_METHODS
+        #region TARGET_METHODS
 
         public abstract void TargetHit(Target target);
         public abstract void TargetMissed();
 
-#endregion
+        #endregion
+
+
+        #region PAUSE_HANDLING
+
+        public void TogglePause()
+        {
+            if (!IsPaused)
+            {
+                Pause();
+            }
+            else
+            {
+                Resume();
+            }
+        }
+
+        protected virtual void Pause()
+        {
+            IsPaused = true;
+        }
+
+        protected virtual void Resume()
+        {
+            IsPaused = false;
+        }
+
+        #endregion
     }
 }
