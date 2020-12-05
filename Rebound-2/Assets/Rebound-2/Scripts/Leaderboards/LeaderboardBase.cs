@@ -5,19 +5,19 @@ using UnityEngine.Events;
 
 namespace BumblePux.Rebound.Leaderboards
 {
-    public abstract class LeaderboardBase : Singleton<LeaderboardBase>
+    public abstract class LeaderboardBase : MonoBehaviour
     {
         public enum LeaderboardType
         {
             TimedMode
         }
 
-        protected List<HighScore> highScores = new List<HighScore>();
+        protected HighScore[] highScores;
 
         //--------------------------------------------------------------------------------
         public abstract void ReportScore(LeaderboardType leaderboard, string userName, int score);
         public abstract void RequestScores(LeaderboardType leaderboard, UnityAction<bool, string> callback);
-        public abstract List<HighScore> GetScores();
+        public abstract HighScore[] GetScores();
     }
 
     //--------------------------------------------------------------------------------

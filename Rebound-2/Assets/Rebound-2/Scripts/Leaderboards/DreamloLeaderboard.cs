@@ -38,13 +38,15 @@ namespace BumblePux.Rebound.Leaderboards
                 if (success)
                 {
                     DreamloData dreamloData = JsonUtility.FromJson<DreamloData>(json);
-                    highScores.Clear();
+                    List<HighScore> scoresList = new List<HighScore>();
                     for (int i = 0; i < dreamloData.dreamlo.leaderboard.entry.Length; i++)
                     {
                         Entry entry = dreamloData.dreamlo.leaderboard.entry[i];
                         if (entry.score == 0) continue;
-                        highScores.Add(new HighScore(entry.name, entry.score));
+                        scoresList.Add(new HighScore(entry.name, entry.score));
                     }
+
+                    highScores = scoresList.ToArray();
 
                     callback?.Invoke(true, "Scores downloaded.");
                 }
@@ -58,7 +60,7 @@ namespace BumblePux.Rebound.Leaderboards
         }
 
         //--------------------------------------------------
-        public override List<HighScore> GetScores()
+        public override HighScore[] GetScores()
         {
             return highScores;
         }

@@ -48,7 +48,7 @@ namespace BumblePux.Rebound.GameModes
 
         // References
         private AudioManager audioManager;
-        private LeaderboardBase leaderboard;
+        private LeaderboardManager leaderboard;
 
         private PlanetsManager planetsManager;
         private Player player;

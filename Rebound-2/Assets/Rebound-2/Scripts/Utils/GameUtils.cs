@@ -1,7 +1,6 @@
 ﻿using BumblePux.Rebound.Actors;
 using BumblePux.Rebound.Data;
 using BumblePux.Rebound.GameModes;
-using BumblePux.Rebound.Leaderboards;
 using BumblePux.Rebound.Managers;
 using UnityEngine;
 
@@ -52,9 +51,15 @@ namespace BumblePux.Rebound.Utils
         }
 
         //--------------------------------------------------
-        public static LeaderboardBase GetLeaderboard()
+        public static LeaderboardManager GetLeaderboard()
         {
-            return LeaderboardBase.Instance;
+            return LeaderboardManager.Instance;
+        }
+
+        //--------------------------------------------------
+        public static AchievementsManager GetAchievements()
+        {
+            return AchievementsManager.Instance;
         }
 
         //--------------------------------------------------

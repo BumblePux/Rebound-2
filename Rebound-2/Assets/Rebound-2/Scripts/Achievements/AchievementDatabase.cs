@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Malee.List;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace BumblePux.Rebound.Achievements
@@ -6,8 +7,11 @@ namespace BumblePux.Rebound.Achievements
     [CreateAssetMenu(fileName = "New Achievement Database", menuName = "Databases/Achievement Database")]
     public class AchievementDatabase : ScriptableObject
     {
-        public List<Achievement> Achievements = new List<Achievement>();
+        [Reorderable]
+        public AchievementsArray Achievements;
 
 		//--------------------------------------------------------------------------------
+        [System.Serializable]
+        public class AchievementsArray : ReorderableArray<Achievement> { }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using BumblePux.Rebound.Leaderboards;
+using BumblePux.Rebound.Managers;
 using BumblePux.Rebound.Utils;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,10 +14,10 @@ namespace BumblePux.Rebound.UI.Menus
         public Button RefreshButton;
         public LeaderboardEntry LeaderboardEntryPrefab;
 
-        private LeaderboardBase leaderboard;
+        private LeaderboardManager leaderboard;
 
         //---------------------------------------------------------------------------
-        private void Start()
+        private void Awake()
         {
             leaderboard = GameUtils.GetLeaderboard();
         }
@@ -41,7 +40,7 @@ namespace BumblePux.Rebound.UI.Menus
             {
                 if (success)
                 {
-                    List<HighScore> highScores = leaderboard.GetScores();
+                    HighScore[] highScores = leaderboard.GetScores();
 
                     // Clear current leaderboard entries
                     foreach (Transform child in LeaderboardContent.transform)
@@ -50,7 +49,7 @@ namespace BumblePux.Rebound.UI.Menus
                     }
 
                     // Populate current leaderboard
-                    for (int i = 0; i < highScores.Count; i++)
+                    for (int i = 0; i < highScores.Length; i++)
                     {
                         LeaderboardEntry entry = Instantiate(LeaderboardEntryPrefab, LeaderboardContent.transform, false);
                         entry.SetEntryText(i + 1, highScores[i].Name, highScores[i].Score);

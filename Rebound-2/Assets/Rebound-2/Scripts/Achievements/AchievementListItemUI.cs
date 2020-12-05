@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace BumblePux.Rebound.Achievements
 {
-    public class AchievementUI : MonoBehaviour
+    public class AchievementListItemUI : MonoBehaviour
     {
         [Header("References")]
         public TMP_Text NameText;
