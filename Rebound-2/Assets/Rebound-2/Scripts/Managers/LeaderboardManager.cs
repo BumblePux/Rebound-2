@@ -13,7 +13,8 @@ namespace BumblePux.Rebound.Managers
         //--------------------------------------------------------------------------------
         private void Awake()
         {
-#if UNITY_EDITOR || UNITY_STANDALONE
+            // TODO: Remove Android support here. It's here for device testing only as Google Play isn't implemented yet.
+#if UNITY_EDITOR || UNITY_STANDALONE || UNITY_ANDROID
             platform = gameObject.AddComponent<DreamloLeaderboard>();
 #endif
         }

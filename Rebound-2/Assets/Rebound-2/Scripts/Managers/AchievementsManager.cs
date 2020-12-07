@@ -14,7 +14,8 @@ namespace BumblePux.Rebound.Managers
         //--------------------------------------------------------------------------------
         private void Awake()
         {
-#if UNITY_EDITOR || UNITY_STANDLONE
+            // TODO: Remove Android support here. It's here for device testing only as Google Play isn't implemented yet.
+#if UNITY_EDITOR || UNITY_STANDLONE || UNITY_ANDROID
             platform = gameObject.AddComponent<LocalAchievements>();
 #endif
         }
