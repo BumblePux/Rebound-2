@@ -1,0 +1,9 @@
+lastUpgrade=01012
+proj.pluginVersion=0.10.12
+proj.AppId=841751285216
+proj.classDir=Assets%2fRebound-2%2fGooglePlay
+proj.ConstantsClassName=GPGSIds
+and.ResourceData=%3c%3fxml+version%3d%221.0%22+encoding%3d%22utf-8%22%3f%3e%0d%0a%3c%21--Google+Play+game+services+IDs.+Save+this+file+as+res%2fvalues%2fgames-ids.xml+in+your+project.--%3e%0d%0a%3cresources%3e%0d%0a++%3c%21--app_id--%3e%0d%0a++%3cstring+name%3d%22app_id%22+translatable%3d%22false%22%3e841751285216%3c%2fstring%3e%0d%0a++%3c%21--package_name--%3e%0d%0a++%3cstring+name%3d%22package_name%22+translatable%3d%22false%22%3ecom.BumblePux.Rebound2%3c%2fstring%3e%0d%0a++%3c%21--achievement+Welcome+to+Rebound+2--%3e%0d%0a++%3cstring+name%3d%22achievement_welcome_to_rebound_2%22+translatable%3d%22false%22%3eCgkI4Jul4r8YEAIQAA%3c%2fstring%3e%0d%0a++%3c%21--achievement+Customiser--%3e%0d%0a++%3cstring+name%3d%22achievement_customiser%22+translatable%3d%22false%22%3eCgkI4Jul4r8YEAIQBQ%3c%2fstring%3e%0d%0a++%3c%21--achievement+On+a+Roll--%3e%0d%0a++%3cstring+name%3d%22achievement_on_a_roll%22+translatable%3d%22false%22%3eCgkI4Jul4r8YEAIQBg%3c%2fstring%3e%0d%0a++%3c%21--achievement+Combo+Master--%3e%0d%0a++%3cstring+name%3d%22achievement_combo_master%22+translatable%3d%22false%22%3eCgkI4Jul4r8YEAIQAw%3c%2fstring%3e%0d%0a++%3c%21--achievement+Millionaire%21--%3e%0d%0a++%3cstring+name%3d%22achievement_millionaire%22+translatable%3d%22false%22%3eCgkI4Jul4r8YEAIQBA%3c%2fstring%3e%0d%0a++%3c%21--leaderboard+Timed+Mode--%3e%0d%0a++%3cstring+name%3d%22leaderboard_timed_mode%22+translatable%3d%22false%22%3eCgkI4Jul4r8YEAIQAQ%3c%2fstring%3e%0d%0a%3c%2fresources%3e
+and.ClientId=
+android.SetupDone=true
+and.BundleId=com.BumblePux.Rebound2

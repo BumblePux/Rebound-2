@@ -1,0 +1,16 @@
+{
+    "Coins": 0,
+    "EquippedShip": "BumblePux",
+    "UnlockedShips": [
+        "BumblePux"
+    ],
+    "Stats": {
+        "LifetimeCoins": 0,
+        "TimedModeHighestCombo": 0,
+        "LifetimeStarsPopped": 0
+    },
+    "AudioSettings": {
+        "IsMusicOn": true,
+        "IsSoundOn": true
+    }
+}
